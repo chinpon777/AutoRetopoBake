@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Blender
+*.blend1
+*.blend2
+*.blend@
+*.autosave
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Local build / package artifacts
+dist/
+build/
+*.zip
+
+# Temporary and generated output
+tmp/
+temp/
+output/
+outputs/
+backups/
+logs/
+*.log
+
+# Auto Retopo Bake working files
+AutoRetopoBake_*_report.txt
+AutoRetopoBake_*/
+__ARB_TMP_*/
+
+# Optional test artifacts
+tests/output/
+tests/tmp/
+tests/__pycache__/
+
+# Local environment files
+.env
+.env.*
+venv/
+.venv/
+
+# Linux AppImage extraction leftovers
+squashfs-root/
+
+# Windows
+*.tmp
+*.bak
