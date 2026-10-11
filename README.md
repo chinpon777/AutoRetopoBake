@@ -64,17 +64,19 @@ Non-mesh objects such as Cameras, Lights, Empties, and Armatures are ignored in 
 
 ## Screenshots
 
-\<!-- Replace these paths with your actual screenshots -->
+<!-- Replace these paths with your actual screenshots -->
 
 ### Add-on Panel
 
-
+![Auto Retopo Bake Panel](images/auto-retopo-bake-panel.png)
 
 ### High Poly → Low Poly
 
-
+![High Poly and Low Poly Comparison](images/high-low-comparison.png)
 
 ### Baked Result
+
+![Diffuse and Normal Baked Result](images/baked-result.png)
 
 
 
