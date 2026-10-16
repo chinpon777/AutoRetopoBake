@@ -3,7 +3,7 @@
 bl_info = {
     "name": "Auto Retopo Bake",
     "author": "AutoNormalBake",
-    "version": (1, 1, 0),
+    "version": (1, 2, 0),
     "blender": (5, 2, 0),
     "location": "3D View > Sidebar > Auto Retopo Bake",
     "description": "AutoRemesher retopology with diffuse and normal baking",

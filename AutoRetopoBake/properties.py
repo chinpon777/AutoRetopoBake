@@ -9,6 +9,8 @@ from bpy.props import (
     StringProperty,
 )
 
+from .preferences import DEFAULT_OUTPUT_DIRECTORY
+
 
 RESOLUTION_ITEMS = (
     ("512", "512", "512 x 512"),
@@ -17,6 +19,41 @@ RESOLUTION_ITEMS = (
     ("4096", "4096", "4096 x 4096"),
     ("8192", "8192", "8192 x 8192"),
 )
+
+
+def _addon_preferences():
+    context = getattr(bpy, "context", None)
+    blender_preferences = getattr(context, "preferences", None)
+    if blender_preferences is None:
+        return None
+    entry = blender_preferences.addons.get(__package__)
+    return entry.preferences if entry is not None else None
+
+
+def _get_output_directory(settings) -> str:
+    preferences = _addon_preferences()
+    legacy_value = settings.get("output_directory")
+    fallback_value = settings.get("_output_directory", DEFAULT_OUTPUT_DIRECTORY)
+    if preferences is None:
+        return legacy_value or fallback_value
+
+    if (
+        preferences.output_directory == DEFAULT_OUTPUT_DIRECTORY
+        and legacy_value
+        and legacy_value != DEFAULT_OUTPUT_DIRECTORY
+        and not settings.get("_output_directory_migrated", False)
+    ):
+        preferences.output_directory = legacy_value
+        settings["_output_directory_migrated"] = True
+    return preferences.output_directory
+
+
+def _set_output_directory(settings, value: str) -> None:
+    settings["_output_directory"] = value
+    settings["_output_directory_migrated"] = True
+    preferences = _addon_preferences()
+    if preferences is not None and preferences.output_directory != value:
+        preferences.output_directory = value
 
 
 class ARB_PG_Settings(bpy.types.PropertyGroup):
@@ -37,7 +74,7 @@ class ARB_PG_Settings(bpy.types.PropertyGroup):
         description="Path selected by the GLB file browser",
         default="",
     )
-    target_quads: IntProperty(name="Target Quads", default=20000, min=1)
+    target_quads: IntProperty(name="Target Quads", default=30000, min=1)
     map_resolution: EnumProperty(
         name="Map Resolution",
         items=RESOLUTION_ITEMS,
@@ -92,8 +129,11 @@ class ARB_PG_Settings(bpy.types.PropertyGroup):
     )
     output_directory: StringProperty(
         name="Output Directory",
+        description="Persistent output directory shared by all Blender files",
         subtype="DIR_PATH",
-        default="//AutoRetopoBake_Output",
+        default=DEFAULT_OUTPUT_DIRECTORY,
+        get=_get_output_directory,
+        set=_set_output_directory,
     )
     last_auto_ray_distance: FloatProperty(
         name="Auto Ray Distance",

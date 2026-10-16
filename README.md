@@ -50,6 +50,7 @@ Non-mesh objects such as Cameras, Lights, Empties, and Armatures are ignored in 
 - Tangent Space Normal Map baking
 - Automatic or manual Ray Distance / Cage Extrusion
 - Configurable target quad count
+- Persistent Output Directory setting saved in Add-on Preferences
 - Configurable texture resolution from 512 to 8192
 - Automatic Low Poly material setup
 - Diffuse texture connected to Principled BSDF Base Color
@@ -63,8 +64,6 @@ Non-mesh objects such as Cameras, Lights, Empties, and Armatures are ignored in 
 ---
 
 ## Screenshots
-
-<!-- Replace these paths with your actual screenshots -->
 
 ### Add-on Panel
 
@@ -296,13 +295,23 @@ A temporary copy is internally created for Merge by Distance and AutoRemesher in
 
 Controls the target quad count requested from AutoRemesher.
 
-Example:
+Default:
 
 ```text
-20000
+30000
 ```
 
 The actual result may differ depending on the geometry.
+
+---
+
+## Output Directory
+
+Controls where generated texture maps and exported Low Poly OBJ files are saved.
+
+The Output Directory is stored in the add-on preferences. Once set, it is preserved after closing Blender and is also available when opening another `.blend` file.
+
+Changing the Output Directory automatically updates the saved preference, so no manual Preferences save is required.
 
 ---
 
@@ -641,7 +650,7 @@ Shader nodes are identified using Blender node types, socket identifiers, and in
 Current public version:
 
 ```text
-1.1.0
+1.2.0
 ```
 
 ---

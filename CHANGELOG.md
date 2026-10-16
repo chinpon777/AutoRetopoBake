@@ -4,6 +4,28 @@ All notable changes to Auto Retopo Bake will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.2.0] - 2026-10-16
+
+### Changed
+
+- Changed the default `Target Quads` value from `20000` to `30000`.
+- Changed the internal AutoRemesher `--sharp-edge` value from `90.0` to `150.0`.
+
+### Added
+
+- Added persistent `Output Directory` storage in the add-on preferences.
+- The Output Directory is automatically saved when changed.
+- The saved Output Directory is restored after restarting Blender and when opening another `.blend` file.
+- Added migration support for an Output Directory value already stored in an existing `.blend` file.
+
+### Validation
+
+- Verified the default Target Quads value is `30000` in Blender 5.2.0 LTS.
+- Verified the AutoRemesher command receives `--sharp-edge 150.0`.
+- Verified Output Directory persistence across multiple Blender restarts.
+- Verified changing the Output Directory updates the saved preference without requiring a manual Preferences save.
+- CLI version remains unchanged.
+
 ## [1.1.0] - 2026-10-08
 
 ### Changed
